@@ -6,14 +6,12 @@
         .controller("EditWebsiteController",EditWebsiteController);
 
     function WebsiteListController(WebsiteService) {
+        var vm = this;
+console.log("cao");
 
 
 
 
-
-        $scope.websites = websites;
-
-        console.log("Hello from WebsiteListController");
     }
 
     function NewWebsiteController() {

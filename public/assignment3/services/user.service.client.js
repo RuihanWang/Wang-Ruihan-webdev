@@ -12,13 +12,20 @@
             ];
         var api = {
             createUser   : createUser,
-            findUserById : findUserById
+            findUserById : findUserById,
+            findUserByCredentials:findUserByCredentials,
+            updateUser:updateUser,
+            deleteUser:deleteUser
 
     };
         return api;
         function createUser(user) {
 
-           console.log(user);
+          var newuser = {
+              _id:user._id, username:user.username,password:user.password,firstName:user.firstName,lastName:user.lastName
+          }
+            users.push(newuser);
+            console.log(users);
 
 
         }
@@ -26,6 +33,50 @@
             var user = null;
             for(u in users) {
                 user = users[u];
+                id = parseInt(id);
+                if(parseInt(user._id) === id) {
+                    return user;
+                    console.log(user);
+
+                }
+
+
+            }
+            return null;
+
+
+        }
+
+        function findUserByCredentials(username, password) {
+            var user = null;
+            for(u in users) {
+                password = password;
+                user = users[u];
+                if(user.username === username && user.password ===password) {
+                    return user;
+                    console.log("success");
+
+
+                }
+
+
+            }
+            console.log("no success")
+            return null;
+
+
+        }
+
+
+        function updateUser(userId, user) {
+
+        }
+
+        function deleteUser(userId) {
+            var user = null;
+            for(u in users) {
+                user = users[u];
+                id = parseInt(id);
                 if(user._id === id) {
                     return user;
                     console.log(user);
@@ -35,6 +86,7 @@
 
             }
             return null;
+
 
 
         }
