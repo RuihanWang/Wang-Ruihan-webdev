@@ -26,11 +26,14 @@
             function RegisterController(UserService,$routeParams,$location) {
                 var vm = this;
                 vm.register = register;
-                function register(id, username, password, firstname,lastname ) {
-                    var user = {_id : id, username: username, password: password, firstName:firstname,lastName:lastname};
+                function register( username, password, firstname,lastname ) {
 
-                    UserService.createUser(user);
-                    $location.url("/user/" +user._id);
+                    var user = {username: username, password: password, firstName:firstname,lastName:lastname};
+
+                    var use  = UserService.createUser(user);
+                    console.log(use);
+                    console.log(user);
+                    $location.url("/user/" +use._id);
                 }
 
             }
@@ -38,11 +41,23 @@
             function ProfileController(UserService,$routeParams,$location) {
 
                 var vm = this;
-                var user = UserService.findUserById(parseInt($routeParams.uid));
-                vm.user = user;
-                vm.Websites = Websites;
-                function Websites() {
-                    $location.url("/user/" +user._id +"/website");
+                vm.UpdateUser = UpdateUser;
+                vm.GetWebsites = GetWebsites;
+                vm.user = UserService.findUserById(parseInt($routeParams.uid));
+
+                function GetWebsites() {
+                    $location.url("/user/" +vm.user._id +"/website");
+                }
+
+                function UpdateUser(username, password, firstname,lastname) {
+                    var UserId = $routeParams.uid;
+                    console.log(UserId);
+                    var use = {_id : UserId, username: username, password: password, firstName:firstname,lastName:lastname};
+
+
+                    UserService.updateUser(UserId, use);
+                    console.log("got it")
+
                 }
 
 

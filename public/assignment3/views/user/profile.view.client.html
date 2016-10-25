@@ -24,9 +24,11 @@
             <input type="text" class="form-control" id="username" placeholder="Username" ng-model="model.user.username">
         </div>
         <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="email" class="form-control" id="email" placeholder="alice@wonderland.com">
+            <label for="first-name">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="passowrd" ng-model="model.user.password">
         </div>
+
+
         <div class="form-group">
             <label for="first-name">First Name</label>
             <input type="text" class="form-control" id="first-name" placeholder="Alice" ng-model="model.user.firstName">
@@ -37,9 +39,8 @@
         </div>
     </form>
 
-    <a class="btn btn-primary btn-block" ng-click="model.Websites()">Websites</a>
-    <a class="btn btn-primary btn-block"
-       href="#/website">Edit Profile</a>
+    <a class="btn btn-primary btn-block" ng-click="model.GetWebsites()">Websites</a>
+    <a class="btn btn-primary btn-block" ng-click="model.UpdateUser(model.user.username, model.user.password,model.user.firstName, model.user.lastName)">Update Profile</a>
     <a class="btn btn-danger btn-block"
        href="#/login">Logout</a>
 </div>

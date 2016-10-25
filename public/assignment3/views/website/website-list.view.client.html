@@ -8,11 +8,11 @@
             </div>
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">
-                    Websites
+                    {{model.user.firstName}}'s Websites
                 </a>
             </div>
             <div class="navbar-text pull-right" style="margin-right: 27px;">
-                <a href="#/website/new">
+                <a href="#user/{{model.uid}}/website/new">
                     <span class="glyphicon glyphicon-plus"></span>
                 </a>
             </div>
@@ -40,15 +40,16 @@
 <div class="row container-fluid">
     <div class="col-sm-4 hidden-xs" style="margin-left:15px; margin-top: 50px; padding-top: 15px; margin-bottom: 50px; position: absolute;top: 0px;bottom: 0px;overflow: auto;">
         <ul class="list-group">
-            <li ng-repeat="website in websites" class="list-group-item">
-                <a href="#">
-                    {{website.name}}
-                </a>
-                <a href="#/website/{{website._id}}" class="pull-right" style="margin-left: 15px;">
+            <li ng-repeat="website in model.websites" class="list-group-item">
+
+                 <a href="#/user/{{model.uid}}/website/{{website._id}}/page" >{{website.name}}</a>
+
+
+                <a href="#/user/{{model.uid}}/website/{{website._id}}" class="pull-right" style="margin-left: 15px;">
                     <span class="glyphicon glyphicon-cog"></span>
                 </a>
-                <a href="#" class="pull-right">
-                    <span class="glyphicon glyphicon-play"></span>
+                <a ng-click="model.RemoveWebsite(website._id)" class="pull-right">
+                    <span class="glyphicon glyphicon-remove"></span>
                 </a>
             </li>
         </ul>
@@ -56,24 +57,16 @@
     <div class="col-sm-8 pull-right" style="padding-left: 30px;padding-right: 0px;">
         <form>
             <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                <label for="name">Website Name</label>
+                <input type="text" class="form-control" id="name" placeholder="facebook">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <label for="description">Website Descrition </label>
+                <input type="password" class="form-control" id="description" placeholder="Hello World!">
             </div>
-            <div class="form-group">
-                <label for="exampleInputFile">File input</label>
-                <input type="file" id="exampleInputFile" class="form-control">
+
             </div>
-            <div class="input-group">
-                      <span class="input-group-addon">
-                        <input type="checkbox" aria-label="...">
-                      </span>
-                <input value="Single" readonly type="text" class="form-control" aria-label="...">
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+
         </form>
     </div>
 </div>

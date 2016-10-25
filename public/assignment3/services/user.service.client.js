@@ -10,6 +10,11 @@
                 {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
                 {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
             ];
+        var ids = [
+            111,222,333,444,555,666,777,888,999
+
+
+        ]
         var api = {
             createUser   : createUser,
             findUserById : findUserById,
@@ -20,12 +25,13 @@
     };
         return api;
         function createUser(user) {
-
+            var UserId = ids.pop();
           var newuser = {
-              _id:user._id, username:user.username,password:user.password,firstName:user.firstName,lastName:user.lastName
-          }
+              _id:UserId, username:user.username,password:user.password,firstName:user.firstName,lastName:user.lastName
+          };
             users.push(newuser);
-            console.log(users);
+            console.log(newuser + "hehe");
+            return newuser;
 
 
         }
@@ -61,7 +67,6 @@
 
 
             }
-            console.log("no success")
             return null;
 
 
@@ -69,6 +74,22 @@
 
 
         function updateUser(userId, user) {
+
+            var use = null;
+            for(u in users) {
+                use = users[u];
+                id = parseInt(userId);
+                if(parseInt(use._id) === id) {
+                    users[u] =user;
+                    console.log(users)
+                    return user;
+
+                }
+
+
+            }
+
+            return null;
 
         }
 
@@ -78,8 +99,9 @@
                 user = users[u];
                 id = parseInt(id);
                 if(user._id === id) {
+                    users.splice(u,1);
                     return user;
-                    console.log(user);
+
 
                 }
 
