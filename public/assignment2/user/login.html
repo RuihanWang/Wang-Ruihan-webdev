@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="../css/style.css" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+
+    <div ng-show="model.error" class="alert alert-danger" role="alert">
+        {{model.error}}
+    </div>
+
+    <h1>Login</h1>
+    <input type="text"
+           ng-model="username"
+           class="form-control"
+           placeholder="username"/>
+    <input type="password"
+           ng-model="password"
+           class="form-control"
+           placeholder="password"/>
+
+    <h1>
+    </h1>
+
+    <a href="/assignment2/user/profile.html"
+       class="btn btn-primary btn-block">Login</a>
+    <a class="btn btn-success btn-block"
+       href="/assignment2/user/register.html">Register</a>
+</div>
+
+</body>
+</html>
