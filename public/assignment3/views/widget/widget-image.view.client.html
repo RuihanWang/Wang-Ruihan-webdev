@@ -54,8 +54,8 @@
                 <label for="url">url </label>
                 <input type="text" class="form-control" id="url" placeholder="url" ng-model="model.widget.url">
             </div>
-            <a  ng-click="model.UpdatePage(model.page._id,model.page.name,model.page.description)" class="btn btn-primary btn-block">Submit</a>
-            <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/" class="btn btn-primary btn-danger">Cancel</a>
+            <a  ng-click="model. NewImageWidget(model.widget.width,model.widget.url)" class="btn btn-primary btn-block">Submit</a>
+            <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}" class="btn btn-primary btn-danger">Cancel</a>
 
         </form>
 

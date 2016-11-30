@@ -54,7 +54,8 @@
                 <label for="text">Text</label>
                 <input type="text" class="form-control" id="text" placeholder="Text" ng-model="model.widget.text">
             </div>
-            <a  ng-click="model.UpdatePage(model.page._id,model.page.name,model.page.description)" class="btn btn-primary btn-block">Submit</a>
+
+            <a  ng-click="model.NewHeaderWidget(model.widget.size, model.widget.text)" class="btn btn-primary btn-block">Submit</a>
             <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/" class="btn btn-primary btn-danger">Cancel</a>
 
         </form>

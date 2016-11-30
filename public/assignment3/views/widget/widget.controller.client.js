@@ -7,7 +7,7 @@
 
 
     function WidgetListNewController($routeParams,
-                                     WidgetService, $sce) {
+                                     WidgetService, $sce,$location) {
         console.log("youtube");
         var vm  = this;
         vm.uid  = $routeParams.uid;
@@ -16,16 +16,36 @@
         vm.wgid = $routeParams.wgid;
         vm.widgets = WidgetService.findWidgetsByPageId(vm.pid);
         vm.checkSafeHtml = checkSafeHtml;
+        vm.NewImageWidget = NewImageWidget;
+        vm.NewHeaderWidget = NewHeaderWidget;
+        vm.NewYoutubeWidget = NewYoutubeWidget;
         vm.checkSafeYouTubeUrl = checkSafeYouTubeUrl;
-        function NewHeaderWidget() {
+        function NewHeaderWidget(size, text) {
             var widget = {
-                name:name, description:description,
+                "_id": Date.now(), "size":size, "text": text,"widgetType": "HEADER", "pageId": vm.pid,
             }
-            PageService.createPage(vm.wid, widget);
-            $location.url("/user/" +vm.uid +"/website/" +vm.wid+ "/page/" +vm.pid +"widget");
+           WidgetService.createWidget(widget);
+
+            $location.url("/user/" +vm.uid +"/website/" +vm.wid+ "/page/" +vm.pid +"/widget");
 
 
     }
+        function NewImageWidget(size,text) {
+            var widget = {
+                "_id": Date.now(), "width":size, "url": text,"widgetType": "IMAGE", "pageId": vm.pid,
+            }
+            WidgetService.createWidget(widget);
+            $location.url("/user/" +vm.uid +"/website/" +vm.wid+ "/page/" +vm.pid +"/widget");
+
+        }
+        function NewYoutubeWidget(size,text) {
+            var widget = {
+                "_id": Date.now(), "width":size, "url": text,"widgetType": "YOUTUBE", "pageId": vm.pid,
+            }
+            WidgetService.createWidget(widget);
+            $location.url("/user/" +vm.uid +"/website/" +vm.wid+ "/page/" +vm.pid +"/widget");
+
+        }
 
         function checkSafeHtml(html) {
             return $sce.trustAsHtml(html);
@@ -46,7 +66,7 @@
     };
 
     function WidgetListController($routeParams,
-                                  WidgetService, $sce) {
+                                  WidgetService, $sce,$location) {
         var vm  = this;
 
 
@@ -80,7 +100,7 @@
 
 
     function WidgetEditController($routeParams,
-                                  WidgetService, $sce) {
+                                  WidgetService, $sce,$location) {
 
 
         var vm  = this;

@@ -60,32 +60,12 @@
         }
 
 
-        function createWidget(userId, website) {
-
-            website.developerId = userId;
-            website._id = "777";
-
-
-            websites.push(website);
-        }
-
-
-        function findWebsiteById(wgId) {
-            var web = null;
-            for (u in websites) {
-                web = websites[u];
-                id = parseInt(websiteId);
-                if (parseInt(web._id) === id) {
-                    return web;
-
-                }
-
-
-            }
-            return null;
-
+        function createWidget(widget) {
+          widgets.push(widget);
 
         }
+
+
 
 
         function updateWidget(wgid, widget) {
@@ -108,13 +88,13 @@
 
         function deleteWidget(wgid) {
 
-            var web = null;
-            for (u in websites) {
-                web = websites[u];
-                id = parseInt(websiteId);
-                if (parseInt(web._id) === id) {
-                    websites.splice(u, 1);
-                    return web;
+            var widget = null;
+            for (g in widgets) {
+                widget = widgets[g];
+                id = parseInt(wgid);
+                if (parseInt(widget._id) === id) {
+                    widgets.splice(u, 1);
+                    return widget;
 
 
                 }
