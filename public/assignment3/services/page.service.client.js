@@ -37,7 +37,7 @@
             var id = ids.pop();
             var newpage = {
 
-                "_id": id, "name": page.name,  "websiteId":websiteId , "description": page.description
+                "_id": "id", "name": page.name,  "websiteId":websiteId , "description": page.description
             };
 
             pages.push(newpage);

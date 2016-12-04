@@ -8,7 +8,7 @@
                 </div>
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#">
-                        Edit Widget
+                       {{model.user.firstName}}'s Websites
                     </a>
                 </div>
                 <div class="navbar-text pull-right" style="margin-right: 27px;">
@@ -30,7 +30,7 @@
                 </div>
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#">
-                        Edit Widget
+                        Edit Website
                     </a>
                 </div>
             </div>
@@ -40,27 +40,17 @@
 
         <div class="col-sm-8 pull-right" style="padding-left: 30px;padding-right: 0px;">
             <form>
-                <div ng-include="'views/widget/widget-'+model.widget.widgetType+'.view.client.html'"></div>
-            </form>
-            <ul>
-                <li class="list-group-item">
-                    <div ng-switch="model.widget.size" >
-                        <h1 ng-switch-when="1">{{model.widget.text}}</h1>
-                        <h2 ng-switch-when="2">{{model.widget.text}}</h2>
-                        <h3 ng-switch-when="3">{{model.widget.text}}</h3>
-                        <h4 ng-switch-when="4">{{model.widget.text}}</h4>
-                        <h5 ng-switch-when="5">{{modelwidget.text}}</h5>
-                        <h6 ng-switch-when="6">{{model.widget.text}}</h6>
+                <div class="form-group">
+                    <label for="name">Website Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="model.website.name" ng-model="model.website.name">
+                </div>
 
-                    <a href="#" class="pull-right" style="margin-left: 15px;">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                   </div>
-                </li>
+                <a  ng-click="model.UpdateWeb(model.website._id, model.website.name)" class="btn btn-primary btn-block">Submit</a>
+                <a href="#/user/{{model.uid}}/website/" class="btn btn-primary btn-block">Cancel</a>
 
-            </ul>
-        </div>
+        </form>
     </div>
+
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">

@@ -10,13 +10,21 @@
             var vm = this;
             vm.Login = Login;
             function Login(username, password) {
-                var user = UserService.findUserByCredentials(username, password);
+                var pro = UserService.findUserByCredentials(username, password);
+                    pro
+                        .success(getUser)
+                        .error(noUser);
+             function noUser() {
+                  console.log("error at login")
+                }
 
-                if(user === null){
+            function getUser(user) {
+                if(user ==='0'){
                     vm.error ="No such User";
-                }else {
+                } else {
                     var uid = user._id;
-                    $location.url("/user/" +uid);
+                    $location.url("/user/" + uid);
+                }
 
                 }
 
