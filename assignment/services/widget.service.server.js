@@ -83,12 +83,11 @@ console.log("widget"+ widgetId);
                 res.send(widget);
 
                 return;
-            }else {
-                res.send('0');
-                return;
             }
-        }
 
+        }
+        res.send('0');
+        return;
     }
 
     function updateWidget(req, res) {

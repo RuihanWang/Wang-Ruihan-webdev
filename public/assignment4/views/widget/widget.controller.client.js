@@ -78,8 +78,7 @@
             vm.wpro
                 .success(function (res) {
                     vm.widget = res;
-                    vm.widget.widgetType = vm.widget.type;
-                    console.log(vm.widget.widgetType);
+                    console.log(vm.widget);
                 })
                 .error(function (res) {
                     console.log("error loading widgets" + res);
@@ -103,7 +102,7 @@
             var id = Date.now();
             var widget = {
                 "_id" :id, "widgetType" :widgetType,"size" :size, "text":text, "pageId":vm.pid
-            }
+            };
             var wgpro = WidgetService.updateWidget(vm.uid,vm.wid,vm.pid,vm.wgid,widget);
             wgpro
                 .success(function (res) {
