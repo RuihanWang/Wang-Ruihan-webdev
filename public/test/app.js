@@ -25,6 +25,7 @@
             };
             $http.post("/api/test", obj)
                 .then(
+
                     findAllMessages,
                     function(err) {
                         vm.error = err;
