@@ -1,6 +1,7 @@
 
 module.exports = function(app, model) {
-
+    var passport = require('passport');
+    var LocalStrategy = require('passport-local').Strategy;
 var users = model.UserModel;
 
     app.get("/api/user",findUser);
@@ -9,6 +10,85 @@ var users = model.UserModel;
     app.put("/api/user/:uid",updateUser);
     app.delete("/api/user/:uid",deleteUser);
     app.get("/api/login",findUserByCredentials);
+    app.post  ('/api/login', passport.authenticate('wam'), login);
+    app.post('/api/logout', logout);
+
+    app.get ('/api/loggedin', loggedin)
+    app.post ('/api/register', register);
+
+
+
+
+
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+    passport.use('wam',new LocalStrategy(localStrategy));
+    function loggedin(req, res) {
+        res.send(req.isAuthenticated() ? req.user : '0');
+    }
+    function logout(req, res) {
+        req.logOut();
+        res.send(200);
+    }
+    function login(req, res) {
+        var user = req.user;
+        res.json(user);
+    }
+    function serializeUser(user, done) {
+        done(null, user);
+    }
+    function register (req, res) {
+        var user = req.body;
+        userModel
+            .createUser(user)
+            .then(
+                function(user){
+                    if(user){
+                        req.login(user, function(err) {
+                            if(err) {
+                                res.status(400).send(err);
+                            } else {
+                                res.json(user);
+                            }
+                        });
+                    }
+                }
+            );
+    }
+
+
+
+
+    function localStrategy(username, password, done) {
+        users
+            .findUserByCredentials(username, password)
+            .then(
+                function(user) {
+                    if(user.username === username && user.password === password) {
+                        return done(null, user);
+                    } else {
+                        return done(null, false);
+                    }
+                },
+                function(err) {
+                    if (err) { return done(err); }
+                }
+            );
+    }
+
+
+    function deserializeUser(user, done) {
+        developerModel
+            .findDeveloperById(user._id)
+            .then(
+                function(user){
+                    done(null, user);
+                },
+                function(err){
+                    done(err, null);
+                }
+            );
+    }
 
     function findUserById(req, res) {
         users

@@ -9,8 +9,24 @@
         function LoginController(UserService, $location) {
             var vm = this;
             vm.Login = Login;
-            function Login(username, password) {
-                var pro = UserService.findUserByCredentials(username, password);
+            vm.logout = logout;
+            function logout() {
+                UserService
+                    .logout()
+                    .then(
+                        function(response) {
+                            $rootScope.currentUser = null;
+                            $location.url("/");
+                        })
+            }
+
+
+                function Login(username, password) {
+                    var user = {
+                        username:username,
+                        password:password
+                    }
+                var pro = UserService.login(user);
                     pro
                         .then(function(user){
                             vm.user = user.data;
@@ -63,17 +79,19 @@
                 vm.UpdateUser = UpdateUser;
                 vm.GetWebsites = GetWebsites;
                 vm.uid = $routeParams.uid;
-                console.log(vm.uid);
-                vm.pro = UserService.findUserById(vm.uid);
-                console.log(vm.pro);
-                vm.pro
-                    .success(function(user) {
-                        vm.user = user;
-                        console.log(vm.user);
-                    })
-                    .error(function() {
-                        console.log("profile erroe")
-                    })
+
+
+
+                // vm.pro = UserService.findUserById(vm.uid);
+                //
+                // vm.pro
+                //     .success(function(user) {
+                //         vm.user = user;
+                //         console.log(vm.user);
+                //     })
+                //     .error(function() {
+                //         console.log("profile erroe")
+                //     })
 
                 function GetWebsites() {
                     $location.url("/user/" +vm.user._id +"/website");
