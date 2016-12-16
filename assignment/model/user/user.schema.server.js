@@ -7,14 +7,10 @@ module.exports = function() {
         lastName: String,
         email:String,
         phone:String,
-        dateCreated:{type:Date, default: Date.now() },
-        facebook: {
-            id: String,
-            token: String
-        }
+        dateCreated:{type:Date, default: Date.now() }
 
 
-        }, {collection: "user"});
+}, {collection: "user"});
     return  userSchema;
 };
 

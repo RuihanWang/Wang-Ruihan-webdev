@@ -3,8 +3,7 @@ module.exports = function(app, model) {
     var passport = require('passport');
     var LocalStrategy = require('passport-local').Strategy;
 var users = model.UserModel;
-    var passport         = require('passport');
-    var FacebookStrategy = require('passport-facebook').Strategy;
+
     app.get("/api/user",findUser);
     app.get("/api/user/:uid",findUserById);
     app.post("/api/user",createUser);
@@ -13,57 +12,10 @@ var users = model.UserModel;
     app.get("/api/login",findUserByCredentials);
     app.post  ('/api/login', passport.authenticate('wam'), login);
     app.post('/api/logout', logout);
-    app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
-    app.get ('/api/loggedin', loggedin);
+
+    app.get ('/api/loggedin', loggedin)
     app.post ('/api/register', register);
 
-
-
-    var facebookConfig = {
-        clientID     : process.env.FACEBOOK_CLIENT_ID,
-        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL  : process.env.FACEBOOK_CALLBACK_URL
-    };
-
-
-
-
-    function facebookStrategy(token, refreshToken, profile, done) {
-        userModel
-            .findUserByFacebookId(profile.id)
-            .then(
-                function(user) {
-                    if(user) {
-                        return done(null, user);
-                    } else {
-                        var email = profile.emails[0].value;
-                        var emailParts = email.split("@");
-                        var newGoogleUser = {
-                            username:  emailParts[0],
-                            firstName: profile.name.givenName,
-                            lastName:  profile.name.familyName,
-                            email:     email,
-                            google: {
-                                id:    profile.id,
-                                token: token
-                            }
-                        };
-                        return userModel.createUser(newGoogleUser);
-                    }
-                },
-                function(err) {
-                    if (err) { return done(err); }
-                }
-            )
-            .then(
-                function(user){
-                    return done(null, user);
-                },
-                function(err){
-                    if (err) { return done(err); }
-                }
-            );
-    }
 
 
 
@@ -71,12 +23,9 @@ var users = model.UserModel;
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
     passport.use('wam',new LocalStrategy(localStrategy));
-    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
-
     function loggedin(req, res) {
         res.send(req.isAuthenticated() ? req.user : '0');
     }
-
     function logout(req, res) {
         req.logOut();
         res.send(200);
@@ -129,8 +78,8 @@ var users = model.UserModel;
 
 
     function deserializeUser(user, done) {
-        users
-            .findUserById(user._id)
+        developerModel
+            .findDeveloperById(user._id)
             .then(
                 function(user){
                     done(null, user);
