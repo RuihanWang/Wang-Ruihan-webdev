@@ -24,6 +24,5 @@
     "test": "test"
   },
   "author": "",
-  "license": "ISC",
-  "devDependencies": {}
+  "license": "ISC"
 }
